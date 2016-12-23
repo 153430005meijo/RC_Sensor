@@ -3,12 +3,6 @@
 #include <Wire.h>
 #include <SPI.h>
 #define INT8U unsigned char
-/* Define Joystick connection pins */
-#define UP     A1
-#define DOWN   A3
-#define LEFT   A2
-#define RIGHT  A5
-#define CLICK  A4
 
 NAxisMotion mySensor;                 //Object that for the sensor
 //unsigned long lastStreamTime = 0;     //To store the last streamed time stamp
@@ -54,20 +48,6 @@ void setup()
   if (CAN.begin(CAN_500KBPS) == CAN_OK) Serial.print("can init ok!!\r\n");
   else Serial.print("Can init fail!!\r\n"); // init can bus : baudrate = 500k
   attachInterrupt(0, MCP2515_ISR, FALLING); // start interrupt
-
-  //Initialize analog pins as inputs
-  pinMode(UP,INPUT);
-  pinMode(DOWN,INPUT);
-  pinMode(LEFT,INPUT);
-  pinMode(RIGHT,INPUT);
-  pinMode(CLICK,INPUT);
-  
-  //Pull analog pins high to enable reading of joystick movements
-  digitalWrite(UP, HIGH);
-  digitalWrite(DOWN, HIGH);
-  digitalWrite(LEFT, HIGH);
-  digitalWrite(RIGHT, HIGH);
-  digitalWrite(CLICK, HIGH);
   
   //9AxisMotionSensor
   I2C.begin();                    //Initialize I2C communication to the let the library communicate with the sensor.
@@ -265,8 +245,6 @@ void loop()
     len = 0;
     }
 */
-
-/*
   Serial.print("aX: ");
   accelx = mySensor.readAccelX();
   Serial.print(accelx); //Accelerometer X-Axis data
@@ -276,7 +254,6 @@ void loop()
   accelz = mySensor.readAccelZ();
   Serial.print(accelz);  //Accelerometer Z-Axis data
   Serial.print("m/s2 ");
-*/
   /*
     Serial.print("lX: ");
     Serial.print(mySensor.readLinearAccelX()); //Linear Acceleration X-Axis data
@@ -296,11 +273,9 @@ void loop()
   Serial.print(" ");
 
   //DIVISION
-  /*
   DIVn = 100 * accelx / accelz;
   Serial.print("DIVn:");
   Serial.println(DIVn);
-  */
 
   delay(5);
 
